@@ -8,7 +8,7 @@ authors = ["Daniil Roman <danroman17397@gmail.com>"]
 python = "^3.8"
 tgtg = "^0.13.2"
 telepot = "^12.7"
-decouple = "^0.0.7"
+python-decouple = "^3.6"
 
 [tool.poetry.dev-dependencies]
 
