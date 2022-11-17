@@ -22,7 +22,7 @@ def __distance(item: dict) -> str:
     return f"{formatted_distance} km"
 
 
-def __item_to_str(item: dict) -> str:
+def item_to_str(item: dict) -> str:
     return f"""
 {__display_name(item)}:
   {__price_change(item)}

@@ -9,6 +9,7 @@ python = "^3.8"
 tgtg = "^0.13.2"
 telepot = "^12.7"
 python-decouple = "^3.6"
+boto3 = "^1.26.12"
 
 [tool.poetry.dev-dependencies]
 
