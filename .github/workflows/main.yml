@@ -2,7 +2,7 @@ name: telegram notify
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 7-20 * * 1-6'
+    - cron: '*/5 7-20 * * *'
 jobs:
   build:
     name: Build
