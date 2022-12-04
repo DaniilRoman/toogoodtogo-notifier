@@ -39,7 +39,7 @@ def __get_creds(email: str) -> dict:
 
 
 def __send_telegram_message(msg):
-    if msg == "" or msg == "Couldn't get TGTG items":
+    if msg == "" or "Couldn't get TGTG items" in msg:
         logging.info("Nothing to send")
     else:
         bot = telepot.Bot(TELEGRAM_TOKEN)
