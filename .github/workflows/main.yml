@@ -38,6 +38,29 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
+      # OpenVPN setup
+      - name: Test IP address before setting up VPN
+        run: curl ifconfig.me
+
+      - name: Install OpenVPN
+        run: sudo apt-get install -y openvpn
+
+      - name: Create credentials.txt
+        run: |
+          echo "${{ secrets.SURFSHARK_USERNAME }}" > credentials.txt
+          echo "${{ secrets.SURFSHARK_PASSWORD }}" >> credentials.txt
+
+      - name: Set up OpenVPN with Surfshark
+        run: |
+          sudo openvpn --config ./surfshark.ovpn --auth-nocache --auth-user-pass credentials.txt &
+        env:
+          OVPN_USERNAME: ${{ secrets.SURFSHARK_USERNAME }}
+          OVPN_PASSWORD: ${{ secrets.SURFSHARK_PASSWORD }}
+
+      - name: Test connection with VPN
+        run: curl ifconfig.me
+
+      # Run script
       - name: Run Python script
         run: poetry run python main.py
         env:
@@ -49,3 +72,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION_NAME: ${{ secrets.AWS_REGION_NAME }}
+
+      # Clean up
+      - name: Clean up
+        run: |
+          sudo killall openvpn
